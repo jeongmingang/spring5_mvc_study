@@ -1,7 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
-  <display-name>web_basic</display-name>
+  <display-name>spring5_mvc_study</display-name>
+   
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
   
+<servlet>
+	<servlet-name>dispatcher</servlet-name>
+	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+	<init-param>
+		<param-name>contextClass</param-name>
+		<param-value>
+			org.springframework.web.context.support.AnnotationConfigWebApplicationContext
+		</param-value>
+	</init-param>
+	<init-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			spring5_mvc_study.config.MvcConfig
+			spring5_mvc_study.config.ControllerConfig
+		</param-value>
+	</init-param>
+	<load-on-startup>1</load-on-startup>
+</servlet>
+
+<servlet-mapping>
+	<servlet-name>dispatcher</servlet-name>
+	<url-pattern>/</url-pattern>
+</servlet-mapping>
+
+<filter>
+	<filter-name>encodingFilter</filter-name>
+	<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+	<init-param>
+		<param-name>encoding</param-name>
+		<param-value>UTF-8</param-value>
+	</init-param>
+</filter>
+
+<filter-mapping>
+	<filter-name>encodingFilter</filter-name>
+	<url-pattern>/*</url-pattern>
+</filter-mapping>
+
   <error-page>
   	<error-code>500</error-code>
   	<location>/error/500.jsp</location>
@@ -16,49 +63,5 @@
   	<exception-type>java.lang.NullPointerException</exception-type>
   	<location>/error/null.jsp</location>
   </error-page>
-  
-  <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
-  </welcome-file-list>
-  
-  <servlet>
-  	<servlet-name>MemRegServlet</servlet-name>
-  	<servlet-class>web_basic.jsp_03.MemRegServlet</servlet-class>
-  </servlet>
-  
-  <servlet-mapping>
-  	<servlet-name>MemRegServlet</servlet-name>
-  	<url-pattern>/jsp_03/memReg</url-pattern>
-  </servlet-mapping>
-  
-  <servlet>
-	  	<servlet-name>configTest</servlet-name>
-	  	<jsp-file>/jsp_05/configTest.jsp</jsp-file>
-	  	<init-param>
-	  		<param-name>fileDir</param-name>
-	  		<param-value>c:\test</param-value>
-	  	</init-param>
-  </servlet>
-  
-  <servlet-mapping>
-  	<servlet-name>configTest</servlet-name>
-  	<url-pattern>/jsp_05/configTest.jsp</url-pattern>
-  </servlet-mapping>
-  
-  <context-param>
-  	<description>로깅 여부</description>
-  	<param-name>logEnabled</param-name>
-  	<param-value>true</param-value>
-  </context-param>
-  
-  <context-param>
-  	<description>디버깅 레벨</description>
-  	<param-name>debugLevel</param-name>
-  	<param-value>5</param-value>
-  </context-param>
+
 </web-app>
